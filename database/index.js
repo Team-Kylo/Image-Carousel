@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/3000/images');
+// require('dotenv').config();
+// const port = process.env.PORT;
+mongoose.connect('mongodb://localhost/carousel', { useNewUrlParser: true, useUnifiedTopology: true  });
 const Schema = mongoose.Schema;
 const db = mongoose.connection;
+faker = require('faker');
 // require('mongoose-type-url');
 
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -11,7 +14,6 @@ db.once('open', function() {
 
 const ImageSchema = new Schema({
   id: Number,
-  author: String,
   url: String,
   width: Number,
   height: Number
@@ -29,8 +31,11 @@ placeholder.save((err, data) => {
   if (err) {
     console.log('images could not be saved', err)
   } else {
-    console.log('images saved')
+    console.log('images saved!', data)
   }
 })
+
+
+// http://picsum.photos/v2   <-- picsum api, specify width & height at the end of the requesl URL
 
 module.exports = Images;
