@@ -1,7 +1,7 @@
 
 
 
-const photoArray = () => {
+const imagesArray = () => {
   const imagesArr = [];
   const randomId = Math.floor(Math.random()* 100);
 
