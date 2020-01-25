@@ -8,11 +8,23 @@ class App extends React.Component {
     super(props);
     this.state = {
       // currentImageIndex: 0
-      // images: []
+      // imagesContainer: []
     }
   }
 
-
+  // componentDidMount() {
+  //   axios
+  //     .get('/carousel')
+  //     .then(res => {
+  //       const imagesContainer = res.data;
+  //       this.setState({imagesContainer}, () => {
+  //         console.log('successful get mount!')
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log('error getting images', err);
+  //     })
+  // }
 
     // setImages(query, index) {
     //   getImages(query, ({data}) => {
@@ -26,24 +38,15 @@ class App extends React.Component {
 
     // getImages(query, callback) {
     //   axios
-    //     .get(`api/carousel/${query}`)
+    //     .get(`carousel/${query}`)
     //     .then(data => callback(data))
     //     .catch(err => console.log('error getting images', err))
     // }
 
-  // getImages(query, callback) {
-  //   axios
-  //     .get('api/carousel')
-  //     .then(({data}) => {     // instead of response, destructure to {data}
-  //       // console.log(response);
-  //       this.setState({images: data})
-  //     })
-  //     .catch((err) => console.error('not getting image data', err));
-  // }
 
   render() {
     return (
-      <div> react is working !!</div>
+      <div> react is working! </div>
     )
   }
 }
