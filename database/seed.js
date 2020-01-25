@@ -15,8 +15,6 @@ for (let i = 0; i < 100; i++) {
   })
 }
 
-
-
 // const seededImagesArr = [];
 // seededImagesArr.push({seededImages});
 
