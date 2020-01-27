@@ -8,23 +8,24 @@ class App extends React.Component {
     super(props);
     this.state = {
       // currentImageIndex: 0
-      // imagesContainer: []
+      imagesContainer: []
     }
   }
 
-  // componentDidMount() {
-  //   axios
-  //     .get('/carousel')
-  //     .then(res => {
-  //       const imagesContainer = res.data;
-  //       this.setState({imagesContainer}, () => {
-  //         console.log('successful get mount!')
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log('error getting images', err);
-  //     })
-  // }
+  componentDidMount() {
+    axios
+      .get('/carousel')
+      .then(res => {
+        const imagesContainer = res.data;
+        this.setState({imagesContainer}, () => {
+          console.log(this.state.imagesContainer);
+          console.log('successful get mount!')
+        });
+      })
+      .catch((err) => {
+        console.log('error getting images', err);
+      })
+  }
 
     // setImages(query, index) {
     //   getImages(query, ({data}) => {
