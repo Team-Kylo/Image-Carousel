@@ -16,9 +16,13 @@ class App extends React.Component {
     axios
       .get('/carousel')
       .then(res => {
-        const imagesContainer = res.data;
+        let newRes = res.data;
+        let urlArr = newRes.map((item) => {
+            return item.url;
+        })
+        let imagesContainer = urlArr;
         this.setState({imagesContainer}, () => {
-          console.log(this.state.imagesContainer);
+          // console.log(this.state.imagesContainer);
           console.log('successful get mount!')
         });
       })
