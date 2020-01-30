@@ -45,12 +45,12 @@ class App extends React.Component {
   leftClick = () => {
     console.log('left click!');
 
-    let index;
-    if (this.state.index === 0) {
-      index = this.state.images.length -1;
-    } else {
-      index = this.state.index - 1;
+    let index = this.state.index;
+    if (index === 0) {
+      index = this.state.images.length;
     }
+    index--;
+
       this.setState({
           index: index
       })
@@ -58,12 +58,12 @@ class App extends React.Component {
    rightClick = () => {
     console.log('right click!');
 
-    let index;
-    if (this.state.index === this.state.images.length - 1) {
-      index = 0;
-    } else {
-      index = this.state.index + 1;
+    let index = this.state.index;
+    if (index === this.state.images.length-1) {
+      index = -1;
     }
+    index++;
+
       this.setState({
           index: index
       });
