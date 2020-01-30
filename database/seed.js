@@ -6,7 +6,7 @@ faker = require('faker');
 for (let i = 0; i < 100; i++) {
   let seededImages = new Images({
     id: i,
-    url: faker.image.image(200,200)   // faker.image.imageUrl(width, height) for later fixed sizing
+    url: `https://picsum.photos/id/${i}/300/300`  // faker.image.imageUrl(width, height) for later fixed sizing
   })
   .save((err, data) => {
     if (err) {
