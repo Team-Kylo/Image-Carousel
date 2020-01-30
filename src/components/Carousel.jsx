@@ -13,7 +13,7 @@ import Right from './Right.jsx';
 // `;
 
 
-class App extends React.Component {
+class Carousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -90,4 +90,4 @@ class App extends React.Component {
 }
 
 
-export default App;
+export default Carousel;
