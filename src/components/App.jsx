@@ -7,7 +7,6 @@ import Right from './Right.jsx';
 
 
 // const Styling = styled.div`
-//   display: inline-block;
 //   width: 550px;
 //   height: 550px;
 // `;
@@ -17,67 +16,97 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      index: 0,
+      activeIndex: 0,
       images: []
     }
   }
 
   componentDidMount() {
+    this.getImages()
+  }
+
+  getImages() {
     axios
-      .get('/carousel')
-      .then(res => {
-        let randomUrlArray = res.data.map((item) => {
-            return item.url;
-        }).sort((a, b) => {
-          return 0.5 - Math.random()
-        }).slice(0,3);
-        let images = randomUrlArray;
-        this.setState({images}, () => {
-          console.log(this.state.images);
-          console.log('successful get mount!')
-        });
-      })
-      .catch((err) => {
-        console.log('error getting images', err);
-      })
+    .get('/carousel')
+    .then(res => {
+      let images = res.data
+                   .map(item => item.url)
+                   .sort((a, b) => 0.5 - Math.random())
+                   .slice(0,8);
+      this.setState({images}, () => {
+        console.log(images);
+      });
+    })
+    .catch(err => {
+      console.log('error getting images', err);
+    })
   }
 
   leftClick = () => {
-    console.log('left click!');
-
-    let index = this.state.index;
-    if (index === 0) {
-      index = this.state.images.length;
+    // console.log('left click!');
+    let { activeIndex } = this.state;
+    if (activeIndex === 0) {
+      activeIndex = this.state.images.length;
     }
-    index--;
+    activeIndex--;
 
       this.setState({
-          index: index
+        activeIndex
       })
   }
-   rightClick = () => {
-    console.log('right click!');
 
-    let index = this.state.index;
-    if (index === this.state.images.length-1) {
-      index = -1;
+   rightClick = () => {
+    // console.log('right click!');
+    let { activeIndex } = this.state;
+    if (activeIndex === this.state.images.length - 1) {
+      activeIndex = -1;
     }
-    index++;
+    activeIndex++;
 
       this.setState({
-          index: index
+        activeIndex
       });
    }
 
+   indexClick = (index) => {
+     this.setState({
+       activeIndex: index
+     })
+   }
+
   render() {
+
+    const { activeIndex, images } = this.state;
+
     return (
-      <div className ='imageCarousel'>
-      <Left leftClick={this.leftClick}/>
-      <Right rightClick={this.rightClick}/>
-        <div>
+      <div className="imageCarousel">
+        <div className="Carousel">
+          <Left leftClick={this.leftClick}/>
+          <img src={images[activeIndex]} alt="carousel-index"/>
+          <Right rightClick={this.rightClick}/>
+          <div className="Carousel-smaller">
+            {images.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                onClick={this.indexClick.bind(this, index)}
+                alt="carousel-thumbnail"
+                />
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+}
 
-        <img src={this.state.images[this.state.index]}/>
-
+            {/* {
+          //   return (
+          //     <div key={index} className="carousel">
+          //         <img src={image} alt=""/>
+          //     </div>
+          //   )
+          // })} */}
           {/* {this.state.images.map((image, index) => {
             return (
               <div key={index} className="carousel">
@@ -85,11 +114,5 @@ class App extends React.Component {
               </div>
             )
           })} */}
-        </div>
-      </div>
-    )
-  }
-}
-
 
 export default App;
