@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
-mongoose.connect(process.env.DATABASE, { useNewUrlParser: true, useUnifiedTopology: true  });
+mongoose.connect(process.env.DATABASE || 'mongodb://localhost/carousel', { useNewUrlParser: true, useUnifiedTopology: true  });
 const Schema = mongoose.Schema;
 const db = mongoose.connection;
 

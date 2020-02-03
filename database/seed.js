@@ -1,7 +1,7 @@
 const Images = require('./index.js');
 // faker = require('faker');
 
-const seeder = () {
+const seeder = () => {
   for (let i = 0; i < 100; i++) {
     let seededImages = new Images({
       id: i,
