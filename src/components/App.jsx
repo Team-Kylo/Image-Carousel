@@ -115,7 +115,7 @@ class App extends React.Component {
 
           <CurrentImage>
               <img src={leftarrow}/>
-              <img sr={rightarrow}/>
+              <img src={rightarrow}/>
           <Left leftClick={this.leftClick}/>
           <img src={images[activeIndex]} height="500" width="500" alt="carousel-index"/>
           <Right rightClick={this.rightClick}/>

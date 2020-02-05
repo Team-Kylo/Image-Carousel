@@ -2,3 +2,4 @@
 .env
 /public/bundle.js
 /coverage
+/public
