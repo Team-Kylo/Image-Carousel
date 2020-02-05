@@ -6,11 +6,25 @@ import Left from './Left.jsx';
 import Right from './Right.jsx';
 
 
-// const Styling = styled.div`
-//   width: 550px;
-//   height: 550px;
-// `;
+const List = styled.ul`
+  list-style: none;
+`;
 
+const GridItem = styled.div`
+  display: flex
+  justify-content: center
+  padding: .5rem
+`;
+
+const CurrentImage = styled.div`
+  vertical-align: middle;
+`;
+
+const CarouselContainer = styled.div`
+  display: grid;
+  grid-template-columns: 200px 250px;
+  grid-template rows: 500px;
+`;
 
 class App extends React.Component {
   constructor(props) {
@@ -43,7 +57,7 @@ class App extends React.Component {
   }
 
   leftClick = () => {
-    // console.log('left click!');
+
     let { activeIndex } = this.state;
     if (activeIndex === 0) {
       activeIndex = this.state.images.length;
@@ -56,7 +70,7 @@ class App extends React.Component {
   }
 
    rightClick = () => {
-    // console.log('right click!');
+
     let { activeIndex } = this.state;
     if (activeIndex === this.state.images.length - 1) {
       activeIndex = -1;
@@ -80,21 +94,31 @@ class App extends React.Component {
 
     return (
       <div className="imageCarousel">
-        <div className="Carousel">
-          <Left leftClick={this.leftClick}/>
-          <img src={images[activeIndex]} alt="carousel-index"/>
-          <Right rightClick={this.rightClick}/>
-          <div className="Carousel-smaller">
+        <CarouselContainer>
+        <GridItem>
+        <List>
             {images.map((image, index) => (
+              <li key={image}>
               <img
-                key={index}
                 src={image}
                 onClick={this.indexClick.bind(this, index)}
+                height="100"
+                width="100"
                 alt="carousel-thumbnail"
-                />
+               />
+              </li>
             ))}
-          </div>
-        </div>
+          </List>
+
+          </GridItem>
+
+          <CurrentImage>
+          <Left leftClick={this.leftClick}/>
+          <img src={images[activeIndex]} height="500" width="500" alt="carousel-index"/>
+          <Right rightClick={this.rightClick}/>
+          </CurrentImage>
+
+        </CarouselContainer>
       </div>
     )
   }
