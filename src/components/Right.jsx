@@ -5,7 +5,7 @@ import rightarrow from './rightA.png';
 const ArrowRight = styled.img`
 width: 25px;
 height: 25px;
-right: 275px;
+left: 685px;
 top: 250px;
 position: absolute;
 &:hover {
