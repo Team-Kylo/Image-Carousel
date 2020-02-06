@@ -11,7 +11,7 @@ const ArrowLeft = styled.img`
   width: 25px;
   height: 25px;
   left: 115px;
-  top: 250px;
+  top: 269px;
   position: absolute;
   &:hover {
     transform: scale(1.2, 1.2);
@@ -22,8 +22,8 @@ const ArrowLeft = styled.img`
 const ArrowRight = styled.img`
 width: 25px;
 height: 25px;
-right: 275px;
 top: 250px;
+padding: 10px;
 position: absolute;
 &:hover {
   transform: scale(1.2, 1.2);
