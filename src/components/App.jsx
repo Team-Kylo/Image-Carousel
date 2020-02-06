@@ -4,25 +4,45 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Left from './Left.jsx';
 import Right from './Right.jsx';
+import CurrentPhoto from './CurrentPhoto.jsx';
+import './style.css';
 
 const List = styled.ul`
   list-style: none;
 `;
 
-const GridItem = styled.div`
+const ListDiv = styled.div`
   display: flex
   justify-content: center
   padding: .5rem
 `;
 
-const CurrentImage = styled.div`
+const CurrentImageContainer = styled.div`
   vertical-align: middle;
 `;
 
+// const CurrentImage = styled.img`
+//   width: 550px;
+//   height: 550px;
+//   &:hover {
+//     cursor: zoom-in;
+//   }
+// `;
+
 const CarouselContainer = styled.div`
-  display: grid;
+  display: flex;
   grid-template-columns: 200px 250px;
   grid-template rows: 500px;
+`;
+
+const ImageMap = styled.img`
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1.0;
+  }
 `;
 
 
@@ -31,7 +51,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       activeIndex: 0,
-      images: []
+      images: [],
+      // fade: false
     }
   }
 
@@ -53,36 +74,6 @@ class App extends React.Component {
       console.log('error getting images', err);
     })
   }
-
-  // getImages() {
-  //   let id = Math.floor(Math.random() * 100);
-  //   fetch(`/carousel/${id}`)
-  //   .then(response => response.json())
-  //   .then(images =>
-  //     this.setState({
-  //       images: images
-  //     })
-  //   )
-  //   .catch(err => console.log('error getting images', err));
-  // }
-
-
-  // getImages() {
-  //   axios
-  //   .get('/carousel')
-  //   .then(res => {
-  //     let images = res.data
-  //                  .map(item => item.url)
-  //                  .sort((a, b) => 0.5 - Math.random())
-  //                  .slice(0,8);
-  //     this.setState({images}, () => {
-  //       console.log(images);
-  //     });
-  //   })
-  //   .catch(err => {
-  //     console.log('error getting images', err);
-  //   })
-  // }
 
   leftClick = () => {
 
@@ -112,39 +103,39 @@ class App extends React.Component {
 
    indexClick = (index) => {
      this.setState({
-       activeIndex: index
+       activeIndex: index,
+      //  fade: true
      })
    }
 
   render() {
 
-    const { activeIndex, images } = this.state;
+    const { activeIndex, images, fade } = this.state;
 
     return (
       <div className="imageCarousel">
         <CarouselContainer>
-        <GridItem>
+        <ListDiv>
         <List>
             {images.map((image, index) => (
               <li key={image}>
-              <img
+              <ImageMap
                 src={image}
                 onClick={this.indexClick.bind(this, index)}
-                height="100"
-                width="100"
-                alt="carousel-thumbnail"
+                // onAnimationEnd={() => this.setState({fade: false})}
+                // className={fade ? 'fade' : ''}
+                // alt="carousel-thumbnail"
                />
               </li>
             ))}
           </List>
 
-          </GridItem>
-
-          <CurrentImage>
-          <Left leftClick={this.leftClick}/> <Right rightClick={this.rightClick}/>
-          <img src={images[activeIndex]} height="500" width="500" alt="carousel-index"/>
-          </CurrentImage>
-
+          </ListDiv>
+          <CurrentImageContainer>
+          <Left leftClick={this.leftClick}/>
+          <CurrentPhoto photo={images} index={activeIndex} />
+          <Right rightClick={this.rightClick}/>
+          </CurrentImageContainer>
         </CarouselContainer>
       </div>
     )
