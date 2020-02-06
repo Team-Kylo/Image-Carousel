@@ -14,9 +14,9 @@ const ArrowLeft = styled.img`
   }
 `;
 
-const Left = () => {
+const Left = (props) => {
   return (
-      <ArrowLeft src={leftarrow}></ArrowLeft>
+      <ArrowLeft src={leftarrow} onClick={props.leftClick}></ArrowLeft>
   );
 }
 

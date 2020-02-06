@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-// import Left from './Left.jsx';
-// import Right from './Right.jsx';
+import Left from './Left.jsx';
+import Right from './Right.jsx';
 import CurrentPhoto from './CurrentPhoto.jsx';
 import './style.css';
 
@@ -11,17 +11,14 @@ const List = styled.ul`
   list-style: none;
 `;
 
-const ListDiv = styled.div`
+const GridItem = styled.div`
   display: flex
   justify-content: center
   padding: .5rem
-
 `;
 
 const CurrentImageContainer = styled.div`
-  flex-direction: column;
-  flex-wrap: wrap;
-  align-content: flex-start;
+  vertical-align: middle;
 `;
 
 // const CurrentImage = styled.img`
@@ -34,13 +31,9 @@ const CurrentImageContainer = styled.div`
 
 const CarouselContainer = styled.div`
   display: flex;
+  grid-template-columns: 200px 250px;
+  grid-template rows: 500px;
 `;
-
-// grid-template-columns: 200px 250px;
-// grid-template rows: 500px;
-
-// const LeftDiv;
-// const RightDiv;
 
 const ImageMap = styled.img`
   width: 60px;
@@ -59,7 +52,6 @@ class App extends React.Component {
     this.state = {
       activeIndex: 0,
       images: [],
-      // fade: false
     }
   }
 
@@ -122,7 +114,6 @@ class App extends React.Component {
    indexClick = (index) => {
      this.setState({
        activeIndex: index,
-      //  fade: true
      })
    }
 
@@ -133,30 +124,26 @@ class App extends React.Component {
     return (
       <div className="imageCarousel">
         <CarouselContainer>
-        <ListDiv>
+        <GridItem>
         <List>
             {images.map((image, index) => (
               <li key={image}>
               <ImageMap
                 src={image}
                 onClick={this.indexClick.bind(this, index)}
-                // onAnimationEnd={() => this.setState({fade: false})}
-                // className={fade ? 'fade' : ''}
+                onAnimationEnd={() => this.setState({fade: false})}
+                className={fade ? 'fade' : ''}
                 alt="carousel-thumbnail"
                />
               </li>
             ))}
           </List>
-          </ListDiv>
+
+          </GridItem>
           <CurrentImageContainer>
-
-          {/* <Left leftClick={this.leftClick}/> */}
-
-
-          <CurrentPhoto photo={images} index={activeIndex} leftClick={this.leftClick} rightClick={this.rightClick} />
-
-          {/* <Right rightClick={this.rightClick}/> */}
-
+          <Left leftClick={this.leftClick}/>
+          <CurrentPhoto photo={images} index={activeIndex} />
+          <Right rightClick={this.rightClick}/>
           </CurrentImageContainer>
         </CarouselContainer>
       </div>

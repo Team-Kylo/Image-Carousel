@@ -14,9 +14,9 @@ position: absolute;
 }
 `;
 
-const Right = () => {
+const Right = (props) => {
   return (
-      <ArrowRight src={rightarrow}></ArrowRight>
+      <ArrowRight src={rightarrow} onClick={props.rightClick}></ArrowRight>
   );
 }
 

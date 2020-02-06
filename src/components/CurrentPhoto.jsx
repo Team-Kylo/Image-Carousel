@@ -1,35 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
-import leftarrow from './leftA.png';
-import rightarrow from './rightA.png';
-// import Left from './Left.jsx';
-// import Right from './Right.jsx';
-
-
-const ArrowLeft = styled.img`
-  width: 25px;
-  height: 25px;
-  left: 115px;
-  top: 269px;
-  position: absolute;
-  &:hover {
-    transform: scale(1.2, 1.2);
-    cursor: pointer;
-  }
-`;
-
-const ArrowRight = styled.img`
-width: 25px;
-height: 25px;
-top: 250px;
-padding: 10px;
-position: absolute;
-&:hover {
-  transform: scale(1.2, 1.2);
-  cursor: pointer;
-}
-`;
 
 const CurrentImage = styled.img`
   width: 500px;
@@ -70,11 +41,10 @@ class CurrentPhoto extends React.Component {
 
   render() {
 
-    const { photo, index, leftClick, rightClick } = this.props;
+    const { photo, index } = this.props;
 
     return (
       <Margins>
-        <ArrowLeft src={leftarrow} onClick={leftClick}/>
         <CurrentImage
           src={photo[index]}
           onClick={this.zoomPhoto}
@@ -92,7 +62,6 @@ class CurrentPhoto extends React.Component {
             />
           </Modal>
         )}
-        <ArrowRight src={rightarrow} onClick={rightClick}/>
       </Margins>
     );
   }
