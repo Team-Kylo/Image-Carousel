@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import rightarrow from './rightA.png';
 
 const ArrowRight = styled.img`
-width: 50px;
-height: 50px;
+width: 25px;
+height: 25px;
 `;
 
 const Right = (props) => {

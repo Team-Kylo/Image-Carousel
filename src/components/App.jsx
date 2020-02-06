@@ -25,6 +25,7 @@ const CarouselContainer = styled.div`
   grid-template rows: 500px;
 `;
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -39,13 +40,11 @@ class App extends React.Component {
   }
 
   getImages() {
+    const id = document.location.search.slice(1);
     axios
-    .get('/carousel')
+    .get(`/carousel/${id}`)
     .then(res => {
-      let images = res.data
-                   .map(item => item.url)
-                   .sort((a, b) => 0.5 - Math.random())
-                   .slice(0,8);
+      let images = res.data.map(item => item.url);
       this.setState({images}, () => {
         console.log(images);
       });
@@ -54,6 +53,36 @@ class App extends React.Component {
       console.log('error getting images', err);
     })
   }
+
+  // getImages() {
+  //   let id = Math.floor(Math.random() * 100);
+  //   fetch(`/carousel/${id}`)
+  //   .then(response => response.json())
+  //   .then(images =>
+  //     this.setState({
+  //       images: images
+  //     })
+  //   )
+  //   .catch(err => console.log('error getting images', err));
+  // }
+
+
+  // getImages() {
+  //   axios
+  //   .get('/carousel')
+  //   .then(res => {
+  //     let images = res.data
+  //                  .map(item => item.url)
+  //                  .sort((a, b) => 0.5 - Math.random())
+  //                  .slice(0,8);
+  //     this.setState({images}, () => {
+  //       console.log(images);
+  //     });
+  //   })
+  //   .catch(err => {
+  //     console.log('error getting images', err);
+  //   })
+  // }
 
   leftClick = () => {
 
