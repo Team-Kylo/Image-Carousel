@@ -4,6 +4,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Left from './Left.jsx';
 import Right from './Right.jsx';
+import CurrentPhoto from './CurrentPhoto.jsx';
 
 const List = styled.ul`
   list-style: none;
@@ -19,10 +20,13 @@ const CurrentImageContainer = styled.div`
   vertical-align: middle;
 `;
 
-const CurrentImage = styled.img`
-  width: 500px;
-  height: 500px;
-`;
+// const CurrentImage = styled.img`
+//   width: 550px;
+//   height: 550px;
+//   &:hover {
+//     cursor: zoom-in;
+//   }
+// `;
 
 const CarouselContainer = styled.div`
   display: grid;
@@ -31,8 +35,8 @@ const CarouselContainer = styled.div`
 `;
 
 const ImageMap = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
   opacity: 0.5;
   &:hover {
@@ -136,7 +140,7 @@ class App extends React.Component {
           </GridItem>
           <CurrentImageContainer>
           <Left leftClick={this.leftClick}/> <Right rightClick={this.rightClick}/>
-          <CurrentImage src={images[activeIndex]} alt="carousel-index"/>
+          <CurrentPhoto photo={images} index={activeIndex} />
           </CurrentImageContainer>
         </CarouselContainer>
       </div>

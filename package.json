@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --detectOpenHandles",
+    "build": "webpack",
     "start": "nodemon server",
     "seed": "node database/seed.js"
   },
