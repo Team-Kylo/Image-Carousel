@@ -15,14 +15,29 @@ const GridItem = styled.div`
   padding: .5rem
 `;
 
-const CurrentImage = styled.div`
+const CurrentImageContainer = styled.div`
   vertical-align: middle;
+`;
+
+const CurrentImage = styled.img`
+  width: 500px;
+  height: 500px;
 `;
 
 const CarouselContainer = styled.div`
   display: grid;
   grid-template-columns: 200px 250px;
   grid-template rows: 500px;
+`;
+
+const ImageMap = styled.img`
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1.0;
+  }
 `;
 
 
@@ -64,24 +79,6 @@ class App extends React.Component {
   //     })
   //   )
   //   .catch(err => console.log('error getting images', err));
-  // }
-
-
-  // getImages() {
-  //   axios
-  //   .get('/carousel')
-  //   .then(res => {
-  //     let images = res.data
-  //                  .map(item => item.url)
-  //                  .sort((a, b) => 0.5 - Math.random())
-  //                  .slice(0,8);
-  //     this.setState({images}, () => {
-  //       console.log(images);
-  //     });
-  //   })
-  //   .catch(err => {
-  //     console.log('error getting images', err);
-  //   })
   // }
 
   leftClick = () => {
@@ -127,11 +124,9 @@ class App extends React.Component {
         <List>
             {images.map((image, index) => (
               <li key={image}>
-              <img
+              <ImageMap
                 src={image}
                 onClick={this.indexClick.bind(this, index)}
-                height="100"
-                width="100"
                 alt="carousel-thumbnail"
                />
               </li>
@@ -139,12 +134,10 @@ class App extends React.Component {
           </List>
 
           </GridItem>
-
-          <CurrentImage>
+          <CurrentImageContainer>
           <Left leftClick={this.leftClick}/> <Right rightClick={this.rightClick}/>
-          <img src={images[activeIndex]} height="500" width="500" alt="carousel-index"/>
-          </CurrentImage>
-
+          <CurrentImage src={images[activeIndex]} alt="carousel-index"/>
+          </CurrentImageContainer>
         </CarouselContainer>
       </div>
     )

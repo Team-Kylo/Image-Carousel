@@ -5,6 +5,9 @@ import leftarrow from './leftA.png';
 const ArrowLeft = styled.img`
   width: 25px;
   height: 25px;
+  &:hover {
+    transform: scale(1.1, 1.1);
+  }
 `;
 
 const Left = (props) => {

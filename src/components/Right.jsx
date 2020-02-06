@@ -5,6 +5,9 @@ import rightarrow from './rightA.png';
 const ArrowRight = styled.img`
 width: 25px;
 height: 25px;
+&:hover {
+  transform: scale(1.1, 1.1);
+}
 `;
 
 const Right = (props) => {
