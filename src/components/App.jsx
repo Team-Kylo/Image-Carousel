@@ -2,22 +2,26 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import styled from 'styled-components';
-import Left from './Left.jsx';
-import Right from './Right.jsx';
+// import Left from './Left.jsx';
+// import Right from './Right.jsx';
 import CurrentPhoto from './CurrentPhoto.jsx';
+import './style.css';
 
 const List = styled.ul`
   list-style: none;
 `;
 
-const GridItem = styled.div`
+const ListDiv = styled.div`
   display: flex
   justify-content: center
   padding: .5rem
+
 `;
 
 const CurrentImageContainer = styled.div`
-  vertical-align: middle;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
 `;
 
 // const CurrentImage = styled.img`
@@ -29,10 +33,14 @@ const CurrentImageContainer = styled.div`
 // `;
 
 const CarouselContainer = styled.div`
-  display: grid;
-  grid-template-columns: 200px 250px;
-  grid-template rows: 500px;
+  display: flex;
 `;
+
+// grid-template-columns: 200px 250px;
+// grid-template rows: 500px;
+
+// const LeftDiv;
+// const RightDiv;
 
 const ImageMap = styled.img`
   width: 60px;
@@ -50,7 +58,8 @@ class App extends React.Component {
     super(props);
     this.state = {
       activeIndex: 0,
-      images: []
+      images: [],
+      // fade: false
     }
   }
 
@@ -74,7 +83,6 @@ class App extends React.Component {
   }
 
   // getImages() {
-  //   let id = Math.floor(Math.random() * 100);
   //   fetch(`/carousel/${id}`)
   //   .then(response => response.json())
   //   .then(images =>
@@ -113,34 +121,42 @@ class App extends React.Component {
 
    indexClick = (index) => {
      this.setState({
-       activeIndex: index
+       activeIndex: index,
+      //  fade: true
      })
    }
 
   render() {
 
-    const { activeIndex, images } = this.state;
+    const { activeIndex, images, fade } = this.state;
 
     return (
       <div className="imageCarousel">
         <CarouselContainer>
-        <GridItem>
+        <ListDiv>
         <List>
             {images.map((image, index) => (
               <li key={image}>
               <ImageMap
                 src={image}
                 onClick={this.indexClick.bind(this, index)}
+                // onAnimationEnd={() => this.setState({fade: false})}
+                // className={fade ? 'fade' : ''}
                 alt="carousel-thumbnail"
                />
               </li>
             ))}
           </List>
-
-          </GridItem>
+          </ListDiv>
           <CurrentImageContainer>
-          <Left leftClick={this.leftClick}/> <Right rightClick={this.rightClick}/>
-          <CurrentPhoto photo={images} index={activeIndex} />
+
+          {/* <Left leftClick={this.leftClick}/> */}
+
+
+          <CurrentPhoto photo={images} index={activeIndex} leftClick={this.leftClick} rightClick={this.rightClick} />
+
+          {/* <Right rightClick={this.rightClick}/> */}
+
           </CurrentImageContainer>
         </CarouselContainer>
       </div>
