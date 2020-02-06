@@ -4,8 +4,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Left from './Left.jsx';
 import Right from './Right.jsx';
-import leftarrow from './leftarrow.png';
-import rightarrow from './rightarrow.png';
 
 const List = styled.ul`
   list-style: none;
@@ -114,11 +112,8 @@ class App extends React.Component {
           </GridItem>
 
           <CurrentImage>
-              <img src={leftarrow}/>
-              <img src={rightarrow}/>
-          <Left leftClick={this.leftClick}/>
+          <Left leftClick={this.leftClick}/> <Right rightClick={this.rightClick}/>
           <img src={images[activeIndex]} height="500" width="500" alt="carousel-index"/>
-          <Right rightClick={this.rightClick}/>
           </CurrentImage>
 
         </CarouselContainer>

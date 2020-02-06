@@ -1,19 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import leftarrow from './leftA.png';
 
-const ArrowLeft = styled.i`
-  transform: rotate(135deg);
-  -webkit-transform: rotate(135deg);
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  padding: 3px;
-  height: 5px;
-  width: 5px;
+const ArrowLeft = styled.img`
+  width: 50px;
+  height: 50px;
 `;
 
 const Left = (props) => {
   return (
-      <ArrowLeft onClick={props.leftClick}></ArrowLeft>
+      <ArrowLeft src={leftarrow} onClick={props.leftClick}></ArrowLeft>
   );
 }
 
