@@ -11,7 +11,7 @@ const List = styled.ul`
   list-style: none;
 `;
 
-const GridItem = styled.div`
+const ListDiv = styled.div`
   display: flex
   justify-content: center
   padding: .5rem
@@ -52,6 +52,7 @@ class App extends React.Component {
     this.state = {
       activeIndex: 0,
       images: [],
+      // fade: false
     }
   }
 
@@ -73,17 +74,6 @@ class App extends React.Component {
       console.log('error getting images', err);
     })
   }
-
-  // getImages() {
-  //   fetch(`/carousel/${id}`)
-  //   .then(response => response.json())
-  //   .then(images =>
-  //     this.setState({
-  //       images: images
-  //     })
-  //   )
-  //   .catch(err => console.log('error getting images', err));
-  // }
 
   leftClick = () => {
 
@@ -114,6 +104,7 @@ class App extends React.Component {
    indexClick = (index) => {
      this.setState({
        activeIndex: index,
+      //  fade: true
      })
    }
 
@@ -124,22 +115,22 @@ class App extends React.Component {
     return (
       <div className="imageCarousel">
         <CarouselContainer>
-        <GridItem>
+        <ListDiv>
         <List>
             {images.map((image, index) => (
               <li key={image}>
               <ImageMap
                 src={image}
                 onClick={this.indexClick.bind(this, index)}
-                onAnimationEnd={() => this.setState({fade: false})}
-                className={fade ? 'fade' : ''}
-                alt="carousel-thumbnail"
+                // onAnimationEnd={() => this.setState({fade: false})}
+                // className={fade ? 'fade' : ''}
+                // alt="carousel-thumbnail"
                />
               </li>
             ))}
           </List>
 
-          </GridItem>
+          </ListDiv>
           <CurrentImageContainer>
           <Left leftClick={this.leftClick}/>
           <CurrentPhoto photo={images} index={activeIndex} />
