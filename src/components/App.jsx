@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Left from './Left.jsx';
 import Right from './Right.jsx';
 import CurrentPhoto from './CurrentPhoto.jsx';
-import './style.css';
+// import './style.css';
 
 const List = styled.ul`
   list-style: none;

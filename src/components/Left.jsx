@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import leftarrow from './leftA.png';
 
-const ArrowLeft = styled.img`
-  width: 25px;
-  height: 25px;
+
+const ArrowDiv = styled.div`
+  width: 24px;
+  height: 24px;
   left: 115px;
   top: 250px;
   position: absolute;
@@ -16,7 +16,7 @@ const ArrowLeft = styled.img`
 
 const Left = (props) => {
   return (
-      <ArrowLeft src={leftarrow} onClick={props.leftClick}></ArrowLeft>
+      <ArrowDiv onClick={props.leftClick}> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16,21a0.994,0.994,0,0,1-.664-0.253L5.5,12l9.841-8.747a1,1,0,0,1,1.328,1.494L8.5,12l8.159,7.253A1,1,0,0,1,16,21Z"></path></svg> </ArrowDiv>
   );
 }
 
