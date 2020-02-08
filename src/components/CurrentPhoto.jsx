@@ -12,13 +12,31 @@ const CurrentImage = styled.img`
 `;
 
 const Modal = styled.div`
-  position: static;
-  left: 8%;
-  top: 2.0%;
+  position: fixed;
+  transform: translate(0,0);
+  width: auto;
+  height: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 999;
+  padding: 20px;
 `;
 
+// max-height: calc(100vh - 210px);
+// overflow-y: auto;
+
 const Enlarge = styled.img`
-  width: 750px;
+  width: auto;
+  height: 100%;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 15px;
 `;
 
 const Margins = styled.div`
@@ -52,7 +70,7 @@ class CurrentPhoto extends React.Component {
         />
         {this.state.zoomed && (
           <Modal
-            style={{ position: 'absolute' }}
+            // style={{ position: 'fixed' }}
             onClick={this.zoomPhoto}
           >
             <Enlarge

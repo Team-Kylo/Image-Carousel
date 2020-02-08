@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const ArrowDiv = styled.div`
   width: 24px;
   height: 24px;
-  left: 685px;
+  left: 660px;
   top: 250px;
-  position: absolute;
+  position: static;
   &:hover {
   transform: scale(1.2, 1.2);
   cursor: pointer;
