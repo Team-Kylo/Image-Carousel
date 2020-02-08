@@ -18,7 +18,7 @@ const ListDiv = styled.div`
 `;
 
 const CurrentImageContainer = styled.div`
-  vertical-align: middle;
+
 `;
 
 const CarouselContainer = styled.div`
@@ -44,6 +44,7 @@ class App extends React.Component {
     this.state = {
       activeIndex: 0,
       images: [],
+      zoomed: false
     }
   }
 
@@ -67,30 +68,24 @@ class App extends React.Component {
   }
 
   leftClick = () => {
-
     let { activeIndex } = this.state;
     if (activeIndex === 0) {
       activeIndex = this.state.images.length;
     }
     activeIndex--;
 
-      this.setState({
-        activeIndex
-      })
+    this.setState({activeIndex});
   }
 
    rightClick = () => {
+     let { activeIndex } = this.state;
+     if (activeIndex === this.state.images.length - 1) {
+       activeIndex = -1;
+     }
+     activeIndex++;
 
-    let { activeIndex } = this.state;
-    if (activeIndex === this.state.images.length - 1) {
-      activeIndex = -1;
-    }
-    activeIndex++;
-
-      this.setState({
-        activeIndex
-      });
-   }
+     this.setState({activeIndex});
+  }
 
    indexClick = (index) => {
      this.setState({
@@ -98,9 +93,15 @@ class App extends React.Component {
      })
    }
 
+   zoomPhoto = () => {
+    this.setState({
+      zoomed: !this.state.zoomed
+    })
+  }
+
   render() {
 
-    const { activeIndex, images } = this.state;
+    const { activeIndex, images, zoomed } = this.state;
 
     return (
 
@@ -117,11 +118,11 @@ class App extends React.Component {
             ))}
           </List>
         </ListDiv>
-          <CurrentImageContainer>
-            <Left leftClick={this.leftClick}/>
-            <CurrentPhoto photo={images} index={activeIndex} />
-            <Right rightClick={this.rightClick}/>
-          </CurrentImageContainer>
+        <CurrentImageContainer>
+          <Left leftClick={this.leftClick}/>
+          <CurrentPhoto zoom={this.zoomPhoto} zoomed={zoomed} photo={images} index={activeIndex}/>
+          <Right rightClick={this.rightClick}/>
+        </CurrentImageContainer>
       </CarouselContainer>
 
     )

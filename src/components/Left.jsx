@@ -7,7 +7,7 @@ const ArrowDiv = styled.div`
   height: 24px;
   left: 115px;
   top: 250px;
-  position: static;
+
   &:hover {
     transform: scale(1.2, 1.2);
     cursor: pointer;
