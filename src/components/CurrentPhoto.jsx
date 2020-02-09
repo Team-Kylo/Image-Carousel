@@ -12,71 +12,52 @@ const CurrentImage = styled.img`
 `;
 
 const Modal = styled.div`
-  position: static;
-  left: 8%;
-  top: 2.0%;
+  position: fixed;
+  transform: translate(0,0);
+  width: auto;
+  height: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
+  z-index: 999;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.5);
 `;
 
 const Enlarge = styled.img`
-  width: 750px;
+  width: auto;
+  height: 100%;
+  max-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 `;
 
 const Margins = styled.div`
   padding: 40px;
 `;
 
-class CurrentPhoto extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      zoomed: false
-    }
-  }
+const CurrentPhoto = ({photo, index, zoom, zoomed}) => {
 
-  zoomPhoto = () => {
-    this.setState({
-      zoomed: !this.state.zoomed
-    });
-  };
-
-  render() {
-
-    const { photo, index } = this.props;
-
-    return (
-      <Margins>
-        <CurrentImage
-          src={photo[index]}
-          onClick={this.zoomPhoto}
-          alt="no image"
-        />
-        {this.state.zoomed && (
-          <Modal
-            style={{ position: 'absolute' }}
-            onClick={this.zoomPhoto}
-          >
-            <Enlarge
-              src={photo[index]}
-              onClick={this.zoomPhoto}
-              alt="no image"
-            />
-          </Modal>
-        )}
-      </Margins>
-    );
-  }
+  return (
+    <Margins>
+      <CurrentImage
+        src={photo[index]}
+        onClick={zoom}
+        alt="no image"
+      />
+      {zoomed && (
+        <Modal onClick={zoom}>
+          <Enlarge
+            src={photo[index]}
+            onClick={zoom}
+            alt="no image"
+          />
+        </Modal>
+      )}
+    </Margins>
+  );
 }
 
 export default CurrentPhoto;
-
-
-// .dialog {
-//   box-shadow: 0 8px 6px -6px black;
-//   position: static;
-//   left: 20%;
-//   top: 10%;
-// }
-
-// .image {
-//   width: 300px;
-// }

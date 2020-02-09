@@ -18,21 +18,14 @@ const ListDiv = styled.div`
 `;
 
 const CurrentImageContainer = styled.div`
-  vertical-align: middle;
-`;
 
-// const CurrentImage = styled.img`
-//   width: 550px;
-//   height: 550px;
-//   &:hover {
-//     cursor: zoom-in;
-//   }
-// `;
+`;
 
 const CarouselContainer = styled.div`
   display: flex;
-  grid-template-columns: 200px 250px;
-  grid-template rows: 500px;
+  // grid-template-columns: 200px 250px;
+  // grid-template rows: 500px;
+
 `;
 
 const ImageMap = styled.img`
@@ -45,14 +38,13 @@ const ImageMap = styled.img`
   }
 `;
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       activeIndex: 0,
       images: [],
-      // fade: false
+      zoomed: false
     }
   }
 
@@ -76,85 +68,65 @@ class App extends React.Component {
   }
 
   leftClick = () => {
-
     let { activeIndex } = this.state;
     if (activeIndex === 0) {
       activeIndex = this.state.images.length;
     }
     activeIndex--;
 
-      this.setState({
-        activeIndex
-      })
+    this.setState({activeIndex});
   }
 
    rightClick = () => {
+     let { activeIndex } = this.state;
+     if (activeIndex === this.state.images.length - 1) {
+       activeIndex = -1;
+     }
+     activeIndex++;
 
-    let { activeIndex } = this.state;
-    if (activeIndex === this.state.images.length - 1) {
-      activeIndex = -1;
-    }
-    activeIndex++;
-
-      this.setState({
-        activeIndex
-      });
-   }
+     this.setState({activeIndex});
+  }
 
    indexClick = (index) => {
      this.setState({
        activeIndex: index,
-      //  fade: true
      })
    }
 
+   zoomPhoto = () => {
+    this.setState({
+      zoomed: !this.state.zoomed
+    })
+  }
+
   render() {
 
-    const { activeIndex, images, fade } = this.state;
+    const { activeIndex, images, zoomed } = this.state;
 
     return (
-      <div className="imageCarousel">
-        <CarouselContainer>
+
+      <CarouselContainer>
         <ListDiv>
-        <List>
+          <List>
             {images.map((image, index) => (
               <li key={image}>
-              <ImageMap
-                src={image}
-                onClick={this.indexClick.bind(this, index)}
-                // onAnimationEnd={() => this.setState({fade: false})}
-                // className={fade ? 'fade' : ''}
-                // alt="carousel-thumbnail"
+                <ImageMap
+                  src={image}
+                  onClick={this.indexClick.bind(this, index)}
                />
               </li>
             ))}
           </List>
-
-          </ListDiv>
-          <CurrentImageContainer>
+        </ListDiv>
+        <CurrentImageContainer>
           <Left leftClick={this.leftClick}/>
-          <CurrentPhoto photo={images} index={activeIndex} />
+          <CurrentPhoto zoom={this.zoomPhoto} zoomed={zoomed} photo={images} index={activeIndex}/>
           <Right rightClick={this.rightClick}/>
-          </CurrentImageContainer>
-        </CarouselContainer>
-      </div>
+        </CurrentImageContainer>
+      </CarouselContainer>
+
     )
   }
 }
-
-            {/* {
-          //   return (
-          //     <div key={index} className="carousel">
-          //         <img src={image} alt=""/>
-          //     </div>
-          //   )
-          // })} */}
-          {/* {this.state.images.map((image, index) => {
-            return (
-              <div key={index} className="carousel">
-                  <img src={image} alt=""/>
-              </div>
-            )
-          })} */}
 
 export default App;
