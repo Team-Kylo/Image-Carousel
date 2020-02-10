@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 require('dotenv').config();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT || 3001;
 const Images = require('../database/index.js')
 const bodyParser = require('body-parser');
 
