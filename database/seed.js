@@ -21,7 +21,7 @@ const mongoose = require('mongoose');
 
 const seed = () => {
   for (let i = 0; i < 100; i++) {
-    for (let j = 0; j < 8; j++) {
+    for (let j = 0; j < 9; j++) {
       let seededImages = new Images({
         id: i,
         url: `https://picsum.photos/id/${i*j+j}/300/300`

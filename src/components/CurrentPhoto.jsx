@@ -13,7 +13,6 @@ const CurrentImage = styled.img`
 
 const Modal = styled.div`
   position: fixed;
-  transform: translate(0,0);
   width: auto;
   height: auto;
   left: 0;
@@ -27,6 +26,10 @@ const Modal = styled.div`
 `;
 
 const Enlarge = styled.img`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   width: auto;
   height: 100%;
   max-height: 100%;
