@@ -12,20 +12,35 @@ const List = styled.ul`
 `;
 
 const ListDiv = styled.div`
-  display: flex
-  justify-content: center
-  padding: .5rem
+  display: flex;
+  justify-content: center;
+  padding: .5rem;
 `;
 
 const CurrentImageContainer = styled.div`
+  display: grid;
+  grid-template-columns: [col-one] 1% [col-two] 90% [col-three] 9%;
+  grid-template-rows: [row-one] 40% [row-two] 30% [row-three] 30%;
+  justify-content: start;
+`;
 
+const ArrowLeftGrid = styled.div`
+  grid-column-start: col-one;
+  grid-row-start: row-two;
+`;
+
+const CurrentImageGrid = styled.div`
+  grid-column-start: col-two;
+  grid-row-start: row-one;
+`;
+
+const ArrowRightGrid = styled.div`
+  grid-column-start: col-three;
+  grid-row-start: row-two;
 `;
 
 const CarouselContainer = styled.div`
   display: flex;
-  // grid-template-columns: 200px 250px;
-  // grid-template rows: 500px;
-
 `;
 
 const ImageMap = styled.img`
@@ -77,7 +92,7 @@ class App extends React.Component {
     this.setState({activeIndex});
   }
 
-   rightClick = () => {
+  rightClick = () => {
      let { activeIndex } = this.state;
      if (activeIndex === this.state.images.length - 1) {
        activeIndex = -1;
@@ -87,13 +102,13 @@ class App extends React.Component {
      this.setState({activeIndex});
   }
 
-   indexClick = (index) => {
+  indexClick = (index) => {
      this.setState({
        activeIndex: index,
      })
    }
 
-   zoomPhoto = () => {
+  zoomPhoto = () => {
     this.setState({
       zoomed: !this.state.zoomed
     })
@@ -118,10 +133,11 @@ class App extends React.Component {
             ))}
           </List>
         </ListDiv>
+        <ArrowLeftGrid></ArrowLeftGrid>
         <CurrentImageContainer>
-          <Left leftClick={this.leftClick}/>
-          <CurrentPhoto zoom={this.zoomPhoto} zoomed={zoomed} photo={images} index={activeIndex}/>
-          <Right rightClick={this.rightClick}/>
+          <ArrowLeftGrid> <Left leftClick={this.leftClick}/> </ArrowLeftGrid>
+          <CurrentImageGrid> <CurrentPhoto zoom={this.zoomPhoto} zoomed={zoomed} photo={images} index={activeIndex}/> </CurrentImageGrid>
+          <ArrowRightGrid> <Right rightClick={this.rightClick}/> </ArrowRightGrid>
         </CurrentImageContainer>
       </CarouselContainer>
 
