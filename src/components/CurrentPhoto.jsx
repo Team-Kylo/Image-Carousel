@@ -1,6 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+
+const Margins = styled.div`
+  padding: 40px;
+`;
 
 const CurrentImage = styled.img`
   width: 500px;
@@ -37,23 +40,19 @@ const Enlarge = styled.img`
   overflow-y: auto;
 `;
 
-const Margins = styled.div`
-  padding: 40px;
-`;
-
-const CurrentPhoto = ({photo, index, zoom, zoomed}) => {
+const CurrentPhoto = ({images, index, zoom, zoomed}) => {
 
   return (
     <Margins>
       <CurrentImage
-        src={photo[index]}
+        src={images[index]}
         onClick={zoom}
         alt="no image"
       />
       {zoomed && (
         <Modal onClick={zoom}>
           <Enlarge
-            src={photo[index]}
+            src={images[index]}
             onClick={zoom}
             alt="no image"
           />

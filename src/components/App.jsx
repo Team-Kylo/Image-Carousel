@@ -5,16 +5,11 @@ import styled from 'styled-components';
 import Left from './Left.jsx';
 import Right from './Right.jsx';
 import CurrentPhoto from './CurrentPhoto.jsx';
-// import './style.css';
+import List from './List.jsx';
 
-const List = styled.ul`
-  list-style: none;
-`;
 
-const ListDiv = styled.div`
+const CarouselContainer = styled.div`
   display: flex;
-  justify-content: center;
-  padding: .5rem;
 `;
 
 const CurrentImageContainer = styled.div`
@@ -39,19 +34,6 @@ const ArrowRightGrid = styled.div`
   grid-row-start: row-two;
 `;
 
-const CarouselContainer = styled.div`
-  display: flex;
-`;
-
-const ImageMap = styled.img`
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-  opacity: 0.5;
-  &:hover {
-    opacity: 1.0;
-  }
-`;
 
 class App extends React.Component {
   constructor(props) {
@@ -119,28 +101,20 @@ class App extends React.Component {
     const { activeIndex, images, zoomed } = this.state;
 
     return (
-
       <CarouselContainer>
-        <ListDiv>
-          <List>
-            {images.map((image, index) => (
-              <li key={image}>
-                <ImageMap
-                  src={image}
-                  onClick={this.indexClick.bind(this, index)}
-               />
-              </li>
-            ))}
-          </List>
-        </ListDiv>
-        <ArrowLeftGrid></ArrowLeftGrid>
+        <List images={images} indexClick={this.indexClick}/>
         <CurrentImageContainer>
-          <ArrowLeftGrid> <Left leftClick={this.leftClick}/> </ArrowLeftGrid>
-          <CurrentImageGrid> <CurrentPhoto zoom={this.zoomPhoto} zoomed={zoomed} photo={images} index={activeIndex}/> </CurrentImageGrid>
-          <ArrowRightGrid> <Right rightClick={this.rightClick}/> </ArrowRightGrid>
+          <ArrowLeftGrid>
+            <Left leftClick={this.leftClick}/>
+          </ArrowLeftGrid>
+          <CurrentImageGrid>
+            <CurrentPhoto zoom={this.zoomPhoto} zoomed={zoomed} images={images} index={activeIndex}/>
+          </CurrentImageGrid>
+          <ArrowRightGrid>
+            <Right rightClick={this.rightClick}/>
+          </ArrowRightGrid>
         </CurrentImageContainer>
       </CarouselContainer>
-
     )
   }
 }

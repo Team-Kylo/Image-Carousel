@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --detectOpenHandles",
+    "test": "jest --coverage --detectOpenHandles",
     "build": "webpack",
     "start": "nodemon server",
     "seed": "node database/seed.js"
